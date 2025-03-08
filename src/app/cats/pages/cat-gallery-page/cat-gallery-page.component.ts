@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-cat-gallery-page',
   imports: [],
-  templateUrl: './cat-gallery-page.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './cat-gallery-page.component.html'
 })
-export class CatGalleryPageComponent { }
+export default class CatGalleryPageComponent { }

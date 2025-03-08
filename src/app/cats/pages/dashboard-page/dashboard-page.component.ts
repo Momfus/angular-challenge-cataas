@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-home-page',
+  selector: 'app-dashboard-page',
   imports: [],
-  templateUrl: './home-page.component.html',
+  templateUrl: './dashboard-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomePageComponent { }
+export default class DashboardPageComponent { }
