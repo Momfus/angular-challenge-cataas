@@ -6,4 +6,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: './cat-by-tag-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CatByTagPageComponent { }
+export default class CatByTagPageComponent { }

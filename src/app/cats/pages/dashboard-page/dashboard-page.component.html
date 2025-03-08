@@ -1,1 +1,6 @@
-<p>dashboard-page works!</p>,
+<div class="flex h-full">
+  <app-side-bar class="flex-shrink-0 bg-gray-800 text-white"></app-side-bar>
+  <div class="flex-grow overflow-auto page-container p-4">
+    <router-outlet></router-outlet>
+  </div>
+</div>

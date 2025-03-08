@@ -6,4 +6,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: './cat-random-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CatRandomPageComponent { }
+export default class CatRandomPageComponent { }
