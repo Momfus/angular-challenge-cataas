@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+
+@import "tailwindcss";
+
+
+body {
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f9f9f9;
+  height: 100vh;
+}
