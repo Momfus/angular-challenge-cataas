@@ -6,8 +6,6 @@ export const routes: Routes = [
   loadComponent
   : () => import('./cats/pages/dashboard-page/dashboard-page.component'),
 
-
-
   children: [
     {
       path: 'cats-gallery',
@@ -18,6 +16,14 @@ export const routes: Routes = [
       loadComponent: () => import('./cats/pages/cat-votes-page/cat-votes-page.component'),
     },
     {
+      path: 'cats-random',
+      loadComponent: () => import('./cats/pages/cat-random-page/cat-random-page.component'),
+    },
+    {
+      path: 'cats-by-tag',
+      loadComponent: () => import('./cats/pages/cat-by-tag-page/cat-by-tag-page.component'),
+    },
+    {
       path: '**',
       loadComponent: () => import('./shared/pages/not-found-page/not-found-page.component')
     }
@@ -25,7 +31,7 @@ export const routes: Routes = [
 },
 {
   path: '**',
-  loadComponent: () => import('./shared/pages/not-found-page/not-found-page.component')
+  redirectTo: 'dashboard',
 }
 
 ];
