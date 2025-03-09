@@ -19,7 +19,7 @@ export class ModalCatService {
   }
 
   closeModal() {
-    console.log('data');
+    console.log(JSON.stringify('data'));
 
     this.isOpen.set(false);
     this.catData.set(null);

@@ -1,24 +1,64 @@
 @if ( modalCatService.isOpen()) {
-<div
-   id="modal-overlay"
-   class="fixed inset-0 flex justify-center items-center z-50"
-   style="background-color: rgba(31, 41, 55, 0.75)"
-   (click)="closeModalOutsideClick($event)"
->
-   <div
-      class="bg-white dark:bg-gray-900 dark:text-gray-100 p-8 rounded-lg shadow-lg max-w-md w-full relative"
-   >
-      <h2 class="text-2xl font-bold mb-4">Modal Title</h2>
-      <p class="mb-6">This is a simple modal</p>
-      <button
-         class="absolute top-2 right-2 text-gray-200 hover:text-white cursor-pointer"
-         (click)="modalCatService.closeModal()"
-      >
-         <i class="fas fa-times-circle text-2xl"></i>
-      </button>
-      <button class="bg-red-500 text-white px-4 py-2 rounded cursor-pointer">
-         Vote
-      </button>
-   </div>
-</div>
-}
+  <div
+     id="modal-overlay"
+     class="fixed inset-0 flex justify-center items-center z-50"
+     style="background-color: rgba(31, 41, 55, 0.75)"
+     (click)="closeModalOutsideClick($event)"
+  >
+     <div
+        class="bg-white dark:bg-gray-900 dark:text-gray-100 p-8 rounded-lg shadow-lg max-w-md w-full relative"
+        (click)="$event.stopPropagation()"
+     >
+        <!-- Close button -->
+        <button
+           class="absolute top-2 right-2 text-gray-200 hover:text-white cursor-pointer"
+           (click)="modalCatService.closeModal()"
+        >
+           <i class="fas fa-times-circle text-2xl"></i>
+        </button>
+
+        <!-- Header -->
+        <h2 class="text-2xl font-bold mb-4">
+           Photo Date: {{ modalCatService.catData()?.createdAt | date:'MM/dd/yyyy' }}
+        </h2>
+
+        <!-- Total votes -->
+        <p class="mb-4"> <span class="font-bold">Total Vote: </span> {{ voteCount() }}</p>
+
+        <!-- Cat image -->
+        <div class="flex justify-center mb-4">
+          <img
+             [lazyLoad]="modalCatService.catData()?.imageUrl ?? 'assets/cat-image-placeholder-loading.jpg'"
+             [defaultImage]="'assets/cat-image-placeholder-loading.jpg'"
+             [errorImage]="'assets/cat-image-placeholder-error.jpg'"
+             alt="Cat Image"
+             class="max-w-[350px] max-h-[350px] object-cover"
+          />
+       </div>
+
+        <!-- Modal footer -->
+        <div class="flex justify-between items-center">
+           <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+              Remove from vote list
+           </button>
+           <div class="flex items-center space-x-2">
+              <button
+                 (click)="decrementVote()"
+                 [disabled]="voteCount() === 0"
+                 class="bg-gray-200 text-gray-700 px-3 py-2 rounded text-xl hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed
+                 cursor-pointer"
+              >
+                 -
+              </button>
+              <span class="text-lg font-medium">Vote</span>
+              <button
+                 (click)="incrementVote()"
+                 class="bg-gray-200 text-gray-700 px-3 py-2 rounded text-xl hover:bg-gray-300 cursor-pointer"
+              >
+                 +
+              </button>
+           </div>
+        </div>
+     </div>
+  </div>
+  }
