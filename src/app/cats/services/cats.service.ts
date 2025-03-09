@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { inject, Injectable, signal } from "@angular/core";
+import { inject, Injectable, OnInit, signal } from "@angular/core";
 import { map, Observable, tap } from "rxjs";
 import { Cat } from "../interfaces/cats.interface";
 import { environment } from "@environments/environment";
@@ -15,9 +15,16 @@ export class CatsService {
   private _initialLimit = 36;
   private _subsequentLimit = 20;
   private _isFirstCall = true;
+  private _catVoteList = signal<Cat[]>(this.loadCatVoteList());
+  private _catListName = 'catVoteList'
 
   cats = this._cats.asReadonly();
   skip = this._skip.asReadonly();
+  catVoteList = this._catVoteList.asReadonly();
+
+  constructor() {
+    this._catVoteList.set(this.loadCatVoteList());
+  }
 
   getCats(): Observable<Cat[]> {
     const limit = this._isFirstCall ? this._initialLimit : this._subsequentLimit;
@@ -43,4 +50,57 @@ export class CatsService {
     this._skip.set(0);
     this._isFirstCall = true;
   }
+
+  // Localstorage persistence functions
+  private loadCatVoteList(): Cat[] {
+    return JSON.parse(localStorage.getItem(this._catListName) || '[]') as Cat[];
+  }
+
+  private saveCatVoteList(cats: Cat[]): void {
+    localStorage.setItem(this._catListName, JSON.stringify(cats));
+  }
+
+
+  updateCatVote(cat: Cat, votes: number): void {
+    const catVoteList = JSON.parse(localStorage.getItem(this._catListName) || '[]') as Cat[];
+    const index = catVoteList.findIndex(newCat => newCat.id === cat.id);
+
+    if( index === -1 ) {
+      catVoteList.push({ ...cat, votes });
+    } else {
+      catVoteList[index].votes = votes;
+    }
+
+    this.saveCatVoteList(catVoteList);
+    this._catVoteList.set(catVoteList);
+  }
+
+  getCatVotes(id: string | undefined): number {
+    if (!id) {
+      return 0;
+    }
+
+    const catVoteList = JSON.parse(localStorage.getItem(this._catListName) || '[]') as Cat[];
+    const cat = catVoteList.find(cat => cat.id === id);
+    return cat?.votes ?? 0;
+  }
+
+  removeCatVote(id: string): void {
+    const catVoteList = JSON.parse(localStorage.getItem(this._catListName) || '[]') as Cat[];
+    const updatedList = catVoteList.filter(cat => cat.id !== id);
+    this.saveCatVoteList(updatedList);
+    this._catVoteList.set(updatedList);
+  }
+
+  getExistCatInList(id: string | undefined): boolean {
+    if (!id) {
+      return false;
+    }
+
+    const catVoteList = JSON.parse(localStorage.getItem(this._catListName) || '[]') as Cat[];
+    const cat = catVoteList.find(cat => cat.id === id);
+
+    return !!cat;
+  }
+
 }
