@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, ElementRef, inject, OnInit, signal, viewChild } from '@angular/core';
 import { CatsService } from '../../services/cats.service';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { SpinnerLoadingComponent } from 'src/app/shared/components/spinner-loading/spinner-loading.component';
 import { ScrollStateService } from 'src/app/shared/services/scroll-state.service';
+import { CatImageCardComponent } from '../../components/cat-image/cat-image.component';
 
 @Component({
   selector: 'app-cat-gallery-page',
-  imports: [LazyLoadImageModule, NgxSkeletonLoaderModule, SpinnerLoadingComponent],
+  imports: [LazyLoadImageModule, SpinnerLoadingComponent, CatImageCardComponent],
   templateUrl: './cat-gallery-page.component.html'
 })
 export default class CatGalleryPageComponent implements OnInit, AfterViewInit {
@@ -53,15 +53,6 @@ export default class CatGalleryPageComponent implements OnInit, AfterViewInit {
         this.isLoading.set(false);
       }
     });
-  }
-
-  openModal(imageUrl: string) {
-    // this.modalImage.set(imageUrl);
-    // console.log(imageUrl);
-  }
-
-  closeModal() {
-    // this.modalImage.set(null);
   }
 
   onScroll() {

@@ -1,0 +1,24 @@
+@if ( modalCatService.isOpen()) {
+<div
+   id="modal-overlay"
+   class="fixed inset-0 flex justify-center items-center z-50"
+   style="background-color: rgba(31, 41, 55, 0.75)"
+   (click)="closeModalOutsideClick($event)"
+>
+   <div
+      class="bg-white dark:bg-gray-900 dark:text-gray-100 p-8 rounded-lg shadow-lg max-w-md w-full relative"
+   >
+      <h2 class="text-2xl font-bold mb-4">Modal Title</h2>
+      <p class="mb-6">This is a simple modal</p>
+      <button
+         class="absolute top-2 right-2 text-gray-200 hover:text-white cursor-pointer"
+         (click)="modalCatService.closeModal()"
+      >
+         <i class="fas fa-times-circle text-2xl"></i>
+      </button>
+      <button class="bg-red-500 text-white px-4 py-2 rounded cursor-pointer">
+         Vote
+      </button>
+   </div>
+</div>
+}
