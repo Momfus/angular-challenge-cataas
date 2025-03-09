@@ -4,4 +4,5 @@ export interface Cat {
   mimetype: string;
   createdAt: string;
   imageUrl?: string;
+  votes?: number;
 }
