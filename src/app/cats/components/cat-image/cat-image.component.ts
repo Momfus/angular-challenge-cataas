@@ -28,8 +28,6 @@ export class CatImageCardComponent {
   catData = input<Cat | null>(null);
 
   onImageClick() {
-    console.log(this.catData());
-
     this.modalCatService.openModal(
       this.catData()
     );
