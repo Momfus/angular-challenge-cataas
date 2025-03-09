@@ -12,7 +12,7 @@
       <!-- Close button -->
       <button
          class="absolute top-2 right-2 text-gray-200 hover:text-white cursor-pointer"
-         (click)="modalCatService.closeModal()"
+         (click)="onClose()"
       >
          <i class="fas fa-times-circle text-2xl"></i>
       </button>
@@ -46,9 +46,10 @@
       <div class="flex justify-between items-center">
          <button
             class="bg-red-500 text-gray-100 px-3 py-2 rounded text-xl cursor-pointer disabled:bg-gray-400 disabled:text-gray-600 disabled:cursor-not-allowed "
-            [disabled]="voteCount() === 0"
+            [disabled]="!canRemove()"
+            (click)="removeFromVoteList()"
          >
-            Remove from vote list
+          Remove from voting list
          </button>
          <div class="flex items-center space-x-2">
             <button

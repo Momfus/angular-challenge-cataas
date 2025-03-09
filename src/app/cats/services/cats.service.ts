@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { inject, Injectable, signal } from "@angular/core";
+import { inject, Injectable, OnInit, signal } from "@angular/core";
 import { map, Observable, tap } from "rxjs";
 import { Cat } from "../interfaces/cats.interface";
 import { environment } from "@environments/environment";
@@ -22,6 +22,9 @@ export class CatsService {
   skip = this._skip.asReadonly();
   catVoteList = this._catVoteList.asReadonly();
 
+  constructor() {
+    this._catVoteList.set(this.loadCatVoteList());
+  }
 
   getCats(): Observable<Cat[]> {
     const limit = this._isFirstCall ? this._initialLimit : this._subsequentLimit;
@@ -72,7 +75,11 @@ export class CatsService {
     this._catVoteList.set(catVoteList);
   }
 
-  getCatVotes(id: string): number {
+  getCatVotes(id: string | undefined): number {
+    if (!id) {
+      return 0;
+    }
+
     const catVoteList = JSON.parse(localStorage.getItem(this._catListName) || '[]') as Cat[];
     const cat = catVoteList.find(cat => cat.id === id);
     return cat?.votes ?? 0;
@@ -84,4 +91,16 @@ export class CatsService {
     this.saveCatVoteList(updatedList);
     this._catVoteList.set(updatedList);
   }
+
+  getExistCatInList(id: string | undefined): boolean {
+    if (!id) {
+      return false;
+    }
+
+    const catVoteList = JSON.parse(localStorage.getItem(this._catListName) || '[]') as Cat[];
+    const cat = catVoteList.find(cat => cat.id === id);
+
+    return !!cat;
+  }
+
 }
