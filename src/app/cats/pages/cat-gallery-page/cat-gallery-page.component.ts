@@ -11,33 +11,29 @@ import { SpinnerLoadingComponent } from 'src/app/shared/components/spinner-loadi
   templateUrl: './cat-gallery-page.component.html'
 })
 export default class CatGalleryPageComponent implements OnInit {
-  cats = signal<Cat[]>([]);
+
   isLoading = signal<boolean>(false);
   modalImage = signal<string | null>(null);
 
-  private skip = 0;
-  private limit = 16;
-
   private catsService = inject(CatsService);
 
+  cats = this.catsService.cats;
+
   ngOnInit(): void {
-    this.loadCats();
+    if (this.cats().length === 0) {
+      this.loadCats();
+    }
   }
 
   loadCats() {
     this.isLoading.set(true);
-    this.catsService.getCats(this.skip, this.limit).subscribe({
-      next: (newCats) => {
-        console.log(newCats);
-        this.cats.update(current => [...current, ...newCats]);
-        this.skip += this.limit;
-        this.isLoading.set(false);
-      },
+    this.catsService.getCats().subscribe({
+      next: () => this.isLoading.set(false),
       error: (err) => {
         console.error(err);
         this.isLoading.set(false);
       }
-    })
+    });
   }
 
   openModal(imageUrl: string) {
@@ -49,6 +45,10 @@ export default class CatGalleryPageComponent implements OnInit {
 
   closeModal() {
     // this.modalImage.set(null);
+  }
+
+  onScroll(event: Event ) {
+
   }
 
 }
