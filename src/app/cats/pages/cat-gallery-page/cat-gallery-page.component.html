@@ -1,0 +1,27 @@
+<div class="h-[calc(100vh-50px)]   overflow-y-scroll" (scroll)="onScroll()"
+  #groupDiv>
+   <div
+      class="gallery grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 justify-center max-w-7xl mx-auto px-4"
+   >
+      @for (cat of cats(); track $index) {
+      <div
+         class="overflow-hidden w-[200px] h-[200px] rounded-lg shadow-lg transition-transform duration-300 hover:scale-[1.05]"
+      >
+         <img
+            [lazyLoad]="cat.imageUrl ?? 'assets/cat-image-placeholder.jpg'"
+            [defaultImage]="'assets/cat-image-placeholder.jpg'"
+            [errorImage]="'assets/cat-image-placeholder.jpg'"
+            [alt]="cat.tags.join(', ')"
+            class="w-full h-full object-cover cursor-pointer"
+            (click)="openModal(cat.imageUrl ?? 'assets/placeholder.png')"
+         />
+      </div>
+      }
+   </div>
+
+   @if( isLoading() ) {
+   <div class="flex justify-center items-center w-full mt-10">
+      <app-spinner></app-spinner>
+   </div>
+   }
+</div>
