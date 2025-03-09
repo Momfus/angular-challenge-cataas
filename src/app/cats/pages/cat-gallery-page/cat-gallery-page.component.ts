@@ -58,8 +58,6 @@ export default class CatGalleryPageComponent implements OnInit, AfterViewInit {
   openModal(imageUrl: string) {
     // this.modalImage.set(imageUrl);
     // console.log(imageUrl);
-    this.loadCats();
-
   }
 
   closeModal() {
