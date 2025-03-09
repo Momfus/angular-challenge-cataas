@@ -1,15 +1,16 @@
-<div class="h-[calc(100vh-50px)]   overflow-y-scroll" (scroll)="onScroll()"
-  #groupDiv>
+<div
+   class="h-[calc(100vh-50px)] overflow-y-scroll"
+   (scroll)="onScroll()"
+   #groupDiv
+>
    <div
       class="gallery grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 justify-center max-w-7xl mx-auto px-4"
    >
       @for (cat of cats(); track $index) {
       <div
-         class="overflow-hidden w-[200px] h-[200px] rounded-lg shadow-lg transition-transform duration-300 hover:scale-[1.05]"
+         class="overflow-hidden w-[200px] h-[200px] rounded-lg shadow-lg transition-transform duration-300 hover:scale-[1.05] m-auto"
       >
-        <app-cat-image [imageUrl]="cat.imageUrl ?? null"
-        [altText]="cat.tags.join(', ')"></app-cat-image>
-
+         <app-cat-image-card [catData]="cat" />
       </div>
       }
    </div>

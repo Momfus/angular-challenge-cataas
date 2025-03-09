@@ -3,11 +3,11 @@ import { CatsService } from '../../services/cats.service';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { SpinnerLoadingComponent } from 'src/app/shared/components/spinner-loading/spinner-loading.component';
 import { ScrollStateService } from 'src/app/shared/services/scroll-state.service';
-import { CatImageComponent } from '../../components/cat-image/cat-image.component';
+import { CatImageCardComponent } from '../../components/cat-image/cat-image.component';
 
 @Component({
   selector: 'app-cat-gallery-page',
-  imports: [LazyLoadImageModule, SpinnerLoadingComponent, CatImageComponent],
+  imports: [LazyLoadImageModule, SpinnerLoadingComponent, CatImageCardComponent],
   templateUrl: './cat-gallery-page.component.html'
 })
 export default class CatGalleryPageComponent implements OnInit, AfterViewInit {
