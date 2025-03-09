@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { RouterLink } from "@angular/router";
+import { RouterLink, RouterLinkActive } from "@angular/router";
 import { MenuOptions } from "../../../cats/interfaces/menu.interface";
 
 @Component({
-   selector: "app-side-bar",
-   imports: [RouterLink],
-   templateUrl: "./side-bar.component.html",
-   changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: "app-side-bar",
+  imports: [RouterLink, RouterLinkActive],
+  templateUrl: "./side-bar.component.html",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SideBarComponent {
   menuOptions: MenuOptions[] = [
@@ -31,5 +31,4 @@ export class SideBarComponent {
       icon: "fas fa-tags",
     },
   ];
-
 }
