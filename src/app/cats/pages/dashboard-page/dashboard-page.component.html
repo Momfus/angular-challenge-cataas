@@ -5,4 +5,6 @@
   </div>
 </div>
 
-<app-generic-cat-modal />
+@if (modalCatService.isOpen()) {
+  <app-generic-cat-modal />
+}
