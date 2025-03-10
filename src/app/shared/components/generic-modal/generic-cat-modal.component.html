@@ -9,7 +9,6 @@
     class="bg-white dark:bg-gray-900 dark:text-gray-100 p-8 rounded-lg shadow-lg max-w-md w-full relative"
     (click)="$event.stopPropagation()"
   >
-    <!-- Botón de cierre -->
     <button
       class="absolute top-2 right-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 cursor-pointer"
       (click)="onClose()"
@@ -17,18 +16,15 @@
       <i class="fas fa-times-circle text-2xl"></i>
     </button>
 
-    <!-- Encabezado -->
     <h2 class="text-2xl font-bold mb-4">
       Fecha de la foto:
       {{ modalCatService.catData()?.createdAt | date: 'dd/MM/yyyy' }}
     </h2>
 
-    <!-- Votos totales -->
     <p class="mb-4">
       <span class="font-bold">Votos totales: </span> {{ voteCount() }}
     </p>
 
-    <!-- Imagen del gato -->
     <div class="flex justify-center mb-4">
       <img
         [lazyLoad]="
@@ -42,7 +38,6 @@
       />
     </div>
 
-    <!-- Pie del modal -->
     <div class="flex flex-col sm:flex-row justify-between items-center">
       <button
         class="bg-red-500 text-white px-4 py-2 rounded text-lg mb-4 sm:mb-0 sm:mr-2 hover:bg-red-600 transition-colors duration-300 cursor-pointer disabled:bg-gray-400 disabled:text-gray-600 disabled:cursor-not-allowed"
