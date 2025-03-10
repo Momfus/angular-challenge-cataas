@@ -1,1 +1,32 @@
-<p>Under construction...</p>
+<!-- cat-votes-page.component.html -->
+<div
+  class="h-[calc(100vh-50px)] overflow-y-scroll"
+  #groupDiv
+>
+  <div
+    class="gallery grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 justify-center max-w-7xl mx-auto px-4"
+  >
+    @for (cat of visibleCats(); track cat.id) {
+      <div
+        class="overflow-hidden w-[200px] h-[200px] rounded-lg shadow-lg transition-transform duration-300 hover:scale-[1.05] m-auto"
+      >
+        <app-cat-image-card [catData]="cat" />
+      </div>
+    }
+  </div>
+
+
+  @if(visibleCats().length === 0 ) {
+    <div class="text-center text-gray-500 dark:text-gray-400 p-8">
+      <p>No cats in the voting list yet!</p>
+      <p class="mt-2">Start voting in the gallery to add cats
+        <button
+          class="btn-dashboard-link ml-1 px-2 py-1 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200 ease-in-out cursor-pointer"
+          (click)="navigateToDashboard()"
+        >
+          here
+        </button>
+      </p>
+    </div>
+  }
+</div>
