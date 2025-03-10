@@ -54,6 +54,18 @@ export class CatsService {
     this._isFirstCall = true;
   }
 
+  getRandomCat(): Observable<Cat> {
+    return this.http.get<any>(`${environment.catsBaseUrl}/cat?json=true`).pipe(
+      map(response => ({
+        id: response.id,
+        tags: response.tags,
+        mimetype: response.mimetype,
+        createdAt: response.created_at,
+        imageUrl: response.url,
+      }))
+    );
+  }
+
   private loadCatVoteList(): Cat[] {
     return JSON.parse(localStorage.getItem('catVoteList') || '[]') as Cat[];
   }
