@@ -1,1 +1,26 @@
-<p>Under construction...</p>
+
+<div class="text-center mb-8 pt-6 px-4">
+  <h1 class="text-4xl font-bold text-gray-800 dark:text-white mb-2 animate-fade-in">
+    <span class="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">
+       🐱 Random Cat Discovery
+    </span>
+  </h1>
+  <p class="text-lg text-gray-700 dark:text-gray-400 mt-2">
+    Explore unique feline friends and vote for your favorites
+  </p>
+</div>
+<div class="flex flex-col items-center justify-center">
+  <div class="flex flex-col items-center">
+    <button
+      (click)="generateRandomCat()"
+      class="bg-gradient-to-r from-orange-400 to-pink-500 text-white font-semibold py-3 px-8 rounded-full shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl focus:outline-none cursor-pointer"
+    >
+      Get a random cat
+    </button>
+    <div
+      class="mt-8 overflow-hidden rounded-lg transition-all duration-300 ease-out opacity-0 translate-y-5 animate-fade-in-up"
+    >
+      <app-cat-image-card [catData]="currentCat()" [size]="'large'" />
+    </div>
+  </div>
+</div>

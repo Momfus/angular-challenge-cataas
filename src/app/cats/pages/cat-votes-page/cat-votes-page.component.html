@@ -14,7 +14,7 @@
 </div>
 
 <div
-   class="h-[calc(100vh-170px)] overflow-y-auto"
+   class="h-[calc(100vh-245px)] overflow-y-auto"
    [@listAnimation]="visibleCats().length"
 >
    <div
@@ -35,7 +35,7 @@
       <p class="mt-2">
          Start voting in the gallery to add cats
          <button
-            class="btn-dashboard-link ml-1 px-2 py-1 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200 ease-in-out cursor-pointer"
+         class="bg-gradient-to-r from-orange-400 to-pink-500 text-white font-semibold py-1 px-4 rounded-full shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl focus:outline-none cursor-pointer"
             (click)="navigateToDashboard()"
          >
             here
