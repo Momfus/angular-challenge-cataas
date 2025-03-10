@@ -25,10 +25,5 @@ export class SideBarComponent {
       name: "Cats Random",
       icon: "fas fa-random",
     },
-    {
-      path: "cats-by-tag",
-      name: "Cats by Tag",
-      icon: "fas fa-tags",
-    },
   ];
 }

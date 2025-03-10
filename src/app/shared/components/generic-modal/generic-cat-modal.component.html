@@ -1,73 +1,67 @@
-@if ( modalCatService.isOpen()) {
 <div
-   id="modal-overlay"
-   class="fixed inset-0 flex justify-center items-center z-50"
-   style="background-color: rgba(31, 41, 55, 0.75)"
-   (click)="closeModalOutsideClick($event)"
+  *ngIf="modalCatService.isOpen()"
+  id="modal-overlay"
+  class="fixed inset-0 flex justify-center items-center z-50"
+  style="background-color: rgba(31, 41, 55, 0.80)"
+  (click)="closeModalOutsideClick($event)"
 >
-   <div
-      class="bg-white dark:bg-gray-900 dark:text-gray-100 p-8 rounded-lg shadow-lg max-w-md w-full relative"
-      (click)="$event.stopPropagation()"
-   >
-      <!-- Close button -->
+  <div
+    class="bg-white dark:bg-gray-900 dark:text-gray-100 p-8 rounded-lg shadow-lg max-w-md w-full relative"
+    (click)="$event.stopPropagation()"
+  >
+    <button
+      class="absolute top-2 right-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 cursor-pointer"
+      (click)="onClose()"
+    >
+      <i class="fas fa-times-circle text-2xl"></i>
+    </button>
+
+    <h2 class="text-2xl font-bold mb-4">
+      Fecha de la foto:
+      {{ modalCatService.catData()?.createdAt | date: 'dd/MM/yyyy' }}
+    </h2>
+
+    <p class="mb-4">
+      <span class="font-bold">Votos totales: </span> {{ voteCount() }}
+    </p>
+
+    <div class="flex justify-center mb-4">
+      <img
+        [lazyLoad]="
+          modalCatService.catData()?.imageUrl ??
+          'assets/cat-image-placeholder-loading.jpg'
+        "
+        [defaultImage]="'assets/cat-image-placeholder-loading.jpg'"
+        [errorImage]="'assets/cat-image-placeholder-error.jpg'"
+        alt="Imagen del gato"
+        class="max-w-[350px] max-h-[350px] object-cover rounded-lg"
+      />
+    </div>
+
+    <div class="flex flex-col sm:flex-row justify-between items-center">
       <button
-         class="absolute top-2 right-2 text-gray-200 hover:text-white cursor-pointer"
-         (click)="onClose()"
+        class="bg-red-500 text-white px-4 py-2 rounded text-lg mb-4 sm:mb-0 sm:mr-2 hover:bg-red-600 transition-colors duration-300 cursor-pointer disabled:bg-gray-400 disabled:text-gray-600 disabled:cursor-not-allowed"
+        [disabled]="!canRemove()"
+        (click)="removeFromVoteList()"
       >
-         <i class="fas fa-times-circle text-2xl"></i>
+      Remove from voting list
       </button>
-
-      <!-- Header -->
-      <h2 class="text-2xl font-bold mb-4">
-         Photo Date:
-         {{ modalCatService.catData()?.createdAt | date : "MM/dd/yyyy" }}
-      </h2>
-
-      <!-- Total votes -->
-      <p class="mb-4">
-         <span class="font-bold">Total Vote: </span> {{ voteCount() }}
-      </p>
-
-      <!-- Cat image -->
-      <div class="flex justify-center mb-4">
-         <img
-            [lazyLoad]="
-               modalCatService.catData()?.imageUrl ??
-               'assets/cat-image-placeholder-loading.jpg'
-            "
-            [defaultImage]="'assets/cat-image-placeholder-loading.jpg'"
-            [errorImage]="'assets/cat-image-placeholder-error.jpg'"
-            alt="Cat Image"
-            class="max-w-[350px] max-h-[350px] object-cover"
-         />
+      <div class="flex items-center space-x-2">
+        <button
+          (click)="decrementVote()"
+          [disabled]="voteCount() === 0"
+          class="bg-orange-500 text-white px-4 py-2 rounded text-lg hover:bg-orange-600 transition-colors duration-300 disabled:bg-gray-400 disabled:cursor-not-allowed cursor-pointer"
+        >
+          -
+        </button>
+        <span class="text-lg font-medium">Votar</span>
+        <button
+          (click)="incrementVote()"
+          class="bg-orange-500 text-white px-4 py-2 rounded text-lg hover:bg-orange-600 transition-colors duration-300 cursor-pointer"
+        >
+          +
+        </button>
       </div>
-
-      <!-- Modal footer -->
-      <div class="flex justify-between items-center">
-         <button
-            class="bg-red-500 text-gray-100 px-3 py-2 rounded text-xl cursor-pointer disabled:bg-gray-400 disabled:text-gray-600 disabled:cursor-not-allowed "
-            [disabled]="!canRemove()"
-            (click)="removeFromVoteList()"
-         >
-          Remove from voting list
-         </button>
-         <div class="flex items-center space-x-2">
-            <button
-               (click)="decrementVote()"
-               [disabled]="voteCount() === 0"
-               class="bg-orange-500 text-gray-100 px-3 py-2 rounded text-xl hover:bg-orange-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-            >
-               -
-            </button>
-            <span class="text-lg font-medium">Vote</span>
-            <button
-               (click)="incrementVote()"
-               class="bg-orange-500 text-gray-1100 px-3 py-2 rounded text-xl hover:bg-orange-300 cursor-pointer"
-            >
-               +
-            </button>
-         </div>
-      </div>
-   </div>
+    </div>
+  </div>
 </div>
-}

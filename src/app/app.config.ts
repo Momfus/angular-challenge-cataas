@@ -4,6 +4,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,7 +14,8 @@ export const appConfig: ApplicationConfig = {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
-    provideHttpClient()
+    provideHttpClient(),
+    provideAnimations(),
 
   ]
 };

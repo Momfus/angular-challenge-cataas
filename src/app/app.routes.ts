@@ -18,10 +18,6 @@ export const routes: Routes = [
         loadComponent: () => import('./cats/pages/cat-random-page/cat-random-page.component').then(m => m.default)
       },
       {
-        path: 'cats-by-tag',
-        loadComponent: () => import('./cats/pages/cat-by-tag-page/cat-by-tag-page.component').then(m => m.default)
-      },
-      {
         path: '',
         redirectTo: 'cats-gallery',
         pathMatch: 'full'

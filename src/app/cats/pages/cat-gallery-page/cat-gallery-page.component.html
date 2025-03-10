@@ -1,14 +1,29 @@
+<div class="text-center mb-8 pt-6 px-4">
+   <h1
+      class="text-4xl font-bold text-gray-800 dark:text-white mb-2 animate-fade-in"
+   >
+      <span
+         class="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent"
+      >
+         🐾 Scroll to explore more purr-fect candidates!
+      </span>
+   </h1>
+   <p class="text-lg text-gray-700 dark:text-gray-400 mt-2">
+      Vote for your favorite feline friends
+   </p>
+</div>
 <div
-   class="h-[calc(100vh-50px)] overflow-y-scroll"
+   class="h-[calc(100vh-245px)] overflow-y-auto"
    (scroll)="onScroll()"
    #groupDiv
 >
+
    <div
       class="gallery grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 justify-center max-w-7xl mx-auto px-4"
    >
       @for (cat of cats(); track $index) {
       <div
-         class="overflow-hidden w-[200px] h-[200px] rounded-lg shadow-lg transition-transform duration-300 hover:scale-[1.05] m-auto"
+         class="overflow-hidden w-[200px] h-[200px] rounded-lg shadow-lg transition-all duration-300 ease-out hover:scale-[1.05] m-auto opacity-0 translate-y-5 animate-fade-in-up"
       >
          <app-cat-image-card [catData]="cat" />
       </div>
