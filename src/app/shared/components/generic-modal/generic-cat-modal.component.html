@@ -17,14 +17,14 @@
     </button>
 
     <h2 class="text-2xl font-bold mb-4">
-      Fecha de la foto:
+      Photo Date:
       {{ modalCatService.catData()?.createdAt | date: 'dd/MM/yyyy' }}
     </h2>
 
     <p class="mb-4">
-      <span class="font-bold">Votos totales: </span> {{ voteCount() }}
+      <span class="font-bold">Total votes: </span> {{ voteCount() }}
     </p>
-
+s
     <div class="flex justify-center mb-4">
       <img
         [lazyLoad]="
