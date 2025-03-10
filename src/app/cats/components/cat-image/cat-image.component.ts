@@ -20,6 +20,7 @@ import { ModalCatService } from 'src/app/shared/services/modal-cat.service';
 
     </div>
   `,
+
 })
 export class CatImageCardComponent {
 

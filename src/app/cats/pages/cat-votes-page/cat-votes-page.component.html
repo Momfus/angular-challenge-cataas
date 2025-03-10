@@ -1,32 +1,46 @@
-<!-- cat-votes-page.component.html -->
-<div
-  class="h-[calc(100vh-50px)] overflow-y-scroll"
-  #groupDiv
->
-  <div
-    class="gallery grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 justify-center max-w-7xl mx-auto px-4"
+<div class="text-center mb-8 pt-6 px-4">
+  <h1
+     class="text-4xl font-bold text-gray-800 dark:text-white mb-2 animate-fade-in"
   >
-    @for (cat of visibleCats(); track cat.id) {
+     <span
+        class="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent"
+     >
+        Voting Leaderboard
+     </span>
+  </h1>
+  <p class="text-lg text-gray-700 dark:text-gray-400 mt-2">
+     Discover the most popular cats ranked by community votes
+  </p>
+</div>
+
+<div
+   class="h-[calc(100vh-170px)] overflow-y-auto"
+   [@listAnimation]="visibleCats().length"
+>
+   <div
+      class="gallery grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 justify-center max-w-7xl mx-auto px-4"
+   >
+      @for (cat of visibleCats(); track trackByCatId($index, cat)) {
       <div
-        class="overflow-hidden w-[200px] h-[200px] rounded-lg shadow-lg transition-transform duration-300 hover:scale-[1.05] m-auto"
+         class="overflow-hidden w-[200px] h-[200px] rounded-lg shadow-lg transition-all duration-300 ease-out hover:scale-[1.05] m-auto"
       >
-        <app-cat-image-card [catData]="cat" />
+         <app-cat-image-card [catData]="cat" />
       </div>
-    }
-  </div>
+      }
+   </div>
 
-
-  @if(visibleCats().length === 0 ) {
-    <div class="text-center text-gray-500 dark:text-gray-400 p-8">
+   @if(visibleCats().length === 0 ) {
+   <div class="text-center text-gray-500 dark:text-gray-400 p-8">
       <p>No cats in the voting list yet!</p>
-      <p class="mt-2">Start voting in the gallery to add cats
-        <button
-          class="btn-dashboard-link ml-1 px-2 py-1 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200 ease-in-out cursor-pointer"
-          (click)="navigateToDashboard()"
-        >
-          here
-        </button>
+      <p class="mt-2">
+         Start voting in the gallery to add cats
+         <button
+            class="btn-dashboard-link ml-1 px-2 py-1 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200 ease-in-out cursor-pointer"
+            (click)="navigateToDashboard()"
+         >
+            here
+         </button>
       </p>
-    </div>
-  }
+   </div>
+   }
 </div>
