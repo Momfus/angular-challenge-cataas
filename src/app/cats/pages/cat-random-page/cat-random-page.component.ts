@@ -21,7 +21,6 @@ export default class CatRandomPageComponent implements OnInit {
   generateRandomCat() {
     this.catsService.getRandomCat().subscribe({
       next: cat => {
-        console.log(cat);
         this.currentCat.set(cat);
       },
       error: err => {
