@@ -31,10 +31,14 @@ export class CatsService {
       `${environment.catsBaseUrl}/api/cats?skip=${this._skip()}&limit=${limit}`
     ).pipe(
       map(cats =>
-        cats.map(cat => ({
-          ...cat,
-          imageUrl: `${environment.catsBaseUrl}/cat/${cat.id}`
-        }))
+        cats.map(cat => {
+          const votes = this.getCatVotes(cat.id);
+          return {
+            ...cat,
+            imageUrl: `${environment.catsBaseUrl}/cat/${cat.id}`,
+            votes,
+          };
+        })
       ),
       tap(newCats => {
         this._cats.update(current => [...current, ...newCats]);
